@@ -8,12 +8,18 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
+import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
+import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.RelativeLayout;
 
 /**
@@ -26,6 +32,7 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
     private Context mContext;
     private AutoCompleteTextView mInputView;
     private ImageView mClearImage;
+    private int inputType;
     private boolean mHasFocus;
 
     public ClearEditText(Context context) {
@@ -44,34 +51,12 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
 
     private void init(Context context, AttributeSet attrs) {
         this.mContext = context;
-        initView();
+        initView(attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ClearEditText);
 
         if (a.hasValue(R.styleable.ClearEditText_input_background)) {
             Drawable background = a.getDrawable(R.styleable.ClearEditText_input_background);
             setInputBackground(background);
-        }
-
-        if (a.hasValue(R.styleable.ClearEditText_input_hint)) {
-            String hint = a.getString(R.styleable.ClearEditText_input_hint);
-            setInputHint(hint);
-        }
-
-        if (a.hasValue(R.styleable.ClearEditText_input_textColorHint)) {
-            ColorStateList hintColors = a.getColorStateList(R.styleable
-                    .ClearEditText_input_textColorHint);
-            setInputHintTextColor(hintColors);
-        }
-
-        if (a.hasValue(R.styleable.ClearEditText_input_textSize)) {
-            float textSize = a.getDimensionPixelSize(R.styleable.ClearEditText_input_textSize, -1);
-            setInputTextSize(textSize);
-        }
-
-        if (a.hasValue(R.styleable.ClearEditText_input_textColor)) {
-            ColorStateList textColors = a.getColorStateList(
-                    R.styleable.ClearEditText_input_textColor);
-            setInputTextColor(textColors);
         }
 
         if (a.hasValue(R.styleable.ClearEditText_input_paddingLeft)) {
@@ -86,36 +71,31 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
             setInputPaddingRight(paddingRight);
         }
 
-        if (a.hasValue(R.styleable.ClearEditText_input_clearSrc)) {
-            Drawable clearSrc = a.getDrawable(R.styleable.ClearEditText_input_clearSrc);
-            setClearSrc(clearSrc);
-        }
-
         a.recycle();
     }
 
 
-    private void initView() {
+    private void initView(AttributeSet attrs) {
         //输入框
-        mInputView = new AutoCompleteTextView(mContext);
+        mInputView = new AutoCompleteTextView(mContext, attrs);
         LayoutParams inputParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams
                 .WRAP_CONTENT);
         inputParams.addRule(RelativeLayout.CENTER_VERTICAL);
 
         mInputView.setBackgroundColor(Color.TRANSPARENT);
-        mInputView.setSingleLine();
         mInputView.addTextChangedListener(this);
         mInputView.setOnFocusChangeListener(this);
 
         addView(mInputView, inputParams);
 
-
         //清除图标
-        mClearImage = new ImageView(mContext);
+        mClearImage = new ImageView(mContext, attrs);
         LayoutParams clearParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams
                 .WRAP_CONTENT);
         clearParams.addRule(RelativeLayout.CENTER_VERTICAL);
         clearParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+
+        mClearImage.setBackgroundColor(Color.TRANSPARENT);
         mClearImage.setVisibility(GONE);
         mClearImage.setOnClickListener(this);
 
@@ -134,6 +114,33 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
             } else {
                 mInputView.setBackgroundDrawable(background);
             }
+        }
+    }
+
+
+    public void setInputPaddingLeft(int paddingLeft) {
+        if (mInputView != null) {
+            int left = mInputView.getPaddingLeft();
+            int top = mInputView.getPaddingTop();
+            int right = mInputView.getPaddingRight();
+            int bottom = mInputView.getPaddingBottom();
+            if (left != paddingLeft) {
+                left = paddingLeft;
+            }
+            mInputView.setPadding(left, top, right, bottom);
+        }
+    }
+
+    public void setInputPaddingRight(int paddingRight) {
+        if (mInputView != null) {
+            int left = mInputView.getPaddingLeft();
+            int top = mInputView.getPaddingTop();
+            int right = mInputView.getPaddingRight();
+            int bottom = mInputView.getPaddingBottom();
+            if (right != paddingRight) {
+                right = paddingRight;
+            }
+            mInputView.setPadding(left, top, right, bottom);
         }
     }
 
@@ -173,34 +180,28 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
         if (mInputView != null && colors != null) mInputView.setTextColor(colors);
     }
 
-    public void setInputPaddingLeft(int paddingLeft) {
-        if (mInputView != null) {
-            int left = mInputView.getPaddingLeft();
-            int top = mInputView.getPaddingTop();
-            int right = mInputView.getPaddingRight();
-            int bottom = mInputView.getPaddingBottom();
-            if (left != paddingLeft) {
-                left = paddingLeft;
-            }
-            mInputView.setPadding(left, top, right, bottom);
+    /**
+     * 设置输入框文本限制
+     *
+     * @param digits 如只能输入：0123456789qwertyuiopasdfghjklzxcvbnm
+     */
+    public void setInputDigits(String digits) {
+        if (mInputView != null && !TextUtils.isEmpty(digits)) {
+            KeyListener keyListener = DigitsKeyListener.getInstance(digits.toString());
+            mInputView.setKeyListener(keyListener);
         }
     }
 
-    public void setInputPaddingRight(int paddingRight) {
-        if (mInputView != null) {
-            int left = mInputView.getPaddingLeft();
-            int top = mInputView.getPaddingTop();
-            int right = mInputView.getPaddingRight();
-            int bottom = mInputView.getPaddingBottom();
-            if (right != paddingRight) {
-                right = paddingRight;
-            }
-            mInputView.setPadding(left, top, right, bottom);
-        }
+    public void setInputType(int type) {
+        if (mInputView != null) mInputView.setInputType(type);
     }
 
     public void setClearSrc(Drawable drawable) {
         if (mClearImage != null && drawable != null) mClearImage.setImageDrawable(drawable);
+    }
+
+    public <T extends ListAdapter & Filterable> void setAdapter(T adapter) {
+        mInputView.setAdapter(adapter);
     }
 
     public String getText() {

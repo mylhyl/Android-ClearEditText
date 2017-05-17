@@ -9,27 +9,67 @@
     tools:context="com.mylhyl.widget.sample.MainActivity">
 
     <com.mylhyl.widget.ClearEditText
+        android:id="@+id/auto_user"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:background="@drawable/bg_input"
-        app:input_hint="输入密码"
-        app:input_clearSrc="@mipmap/ic_edit_clear"
-        app:input_textColor="#212121"
-        app:input_textSize="15sp"/>
+        android:completionThreshold="1"
+        android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
+        android:hint="显示历史用户名"
+        android:src="@mipmap/ic_edit_clear"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        app:input_paddingLeft="20dp"
+        app:input_paddingRight="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_user"/>
+    </com.mylhyl.widget.ClearEditText>
 
     <com.mylhyl.widget.ClearEditText
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="50dp"
         android:layout_margin="10dp"
         android:background="@drawable/bg_input"
-        app:input_hint="输入密码"
-        app:input_clearSrc="@mipmap/ic_edit_clear"
-        app:input_textColor="#212121"
-        app:input_textSize="15sp"/>
+        android:digits="0123456789"
+        android:hint="输入手机号"
+        android:src="@mipmap/ic_edit_clear"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        android:inputType="phone|number"
+        app:input_paddingLeft="60dp"
+        app:input_paddingRight="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="手机号："
+            android:textColor="#212121"
+            android:textSize="15sp"/>
+    </com.mylhyl.widget.ClearEditText>
+
+    <com.mylhyl.widget.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_input"
+        android:hint="输入密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:src="@mipmap/ic_edit_clear"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        app:input_paddingRight="20dp"/>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:text="登录"/>
 </LinearLayout>
