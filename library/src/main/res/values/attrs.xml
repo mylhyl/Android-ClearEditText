@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ClearEditText">
+        <attr name="input_background" format="reference"/>
+        <attr name="input_hint" format="string"/>
+        <attr name="input_textColorHint" format="color|reference"/>
+        <attr name="input_textSize" format="dimension|reference"/>
+        <attr name="input_textColor" format="color|reference"/>
+        <attr name="input_paddingLeft" format="dimension|reference"/>
+        <attr name="input_paddingRight" format="dimension|reference"/>
+        <attr name="input_type" format="string"/>
+        <attr name="input_clearSrc" format="reference"/>
+    </declare-styleable>
+</resources>

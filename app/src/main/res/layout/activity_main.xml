@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mylhyl.widget.sample.MainActivity">
+
+    <com.mylhyl.widget.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_input"
+        app:input_hint="输入密码"
+        app:input_clearSrc="@mipmap/ic_edit_clear"
+        app:input_textColor="#212121"
+        app:input_textSize="15sp"/>
+
+    <com.mylhyl.widget.ClearEditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_input"
+        app:input_hint="输入密码"
+        app:input_clearSrc="@mipmap/ic_edit_clear"
+        app:input_textColor="#212121"
+        app:input_textSize="15sp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登录"/>
+</LinearLayout>
