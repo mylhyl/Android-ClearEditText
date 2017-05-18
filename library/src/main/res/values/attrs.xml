@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="ClearEditText">
-        <attr name="input_background" format="reference"/>
+        <attr name="input_background" format="color|reference"/>
         <attr name="input_paddingLeft" format="dimension|reference"/>
+        <attr name="input_paddingTop" format="dimension|reference"/>
         <attr name="input_paddingRight" format="dimension|reference"/>
+        <attr name="input_paddingBottom" format="dimension|reference"/>
         <attr name="input_marginLeft" format="dimension|reference"/>
+        <attr name="input_marginTop" format="dimension|reference"/>
         <attr name="input_marginRight" format="dimension|reference"/>
+        <attr name="input_marginBottom" format="dimension|reference"/>
+        <attr name="input_layout_toRightOf" format="dimension|reference"/>
+        <attr name="input_clear_width" format="dimension|reference"/>
+        <attr name="input_clear_height" format="dimension|reference"/>
     </declare-styleable>
 </resources>

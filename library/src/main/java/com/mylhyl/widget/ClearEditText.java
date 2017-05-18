@@ -12,11 +12,11 @@ import android.widget.RelativeLayout;
 public final class ClearEditText extends AbsClear {
 
     public ClearEditText(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ClearEditText(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ClearEditText(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -25,9 +25,9 @@ public final class ClearEditText extends AbsClear {
 
     @Override
     protected void configInputParams() {
-
-        LayoutParams inputParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams inputParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        inputParams.setMargins(0, 0, 0, 0);
         inputParams.addRule(RelativeLayout.CENTER_VERTICAL);
         mInputView.setLayoutParams(inputParams);
     }
@@ -37,5 +37,19 @@ public final class ClearEditText extends AbsClear {
         addView(mInputView);
 
         addView(mClearImage);
+    }
+
+    public void addRuleInputView(int verb) {
+        addRuleInputView(verb, TRUE);
+    }
+
+    @Override
+    protected void addRuleInputView(int verb, int subject) {
+        if (mInputView != null) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mInputView
+                    .getLayoutParams();
+            params.addRule(verb, subject);
+            mInputView.setLayoutParams(params);
+        }
     }
 }

@@ -16,11 +16,11 @@ public final class ClearTextInputLayout extends AbsClear {
     private TextInputLayout mTextInputLayout;
 
     public ClearTextInputLayout(Context context) {
-        super(context);
+        this(context, null);
     }
 
     public ClearTextInputLayout(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public ClearTextInputLayout(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -36,14 +36,17 @@ public final class ClearTextInputLayout extends AbsClear {
 
     @Override
     protected void configInputParams() {
-        LayoutParams textInputParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        RelativeLayout.LayoutParams textInputParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         textInputParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        textInputParams.setMargins(0, 0, 0, 0);
 
         mTextInputLayout.setLayoutParams(textInputParams);
 
-        mInputView.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        inputParams.setMargins(0, 0, 0, 0);
+        mInputView.setLayoutParams(inputParams);
     }
 
     @Override
@@ -51,6 +54,16 @@ public final class ClearTextInputLayout extends AbsClear {
         addView(mTextInputLayout);
         mTextInputLayout.addView(mInputView);
         addView(mClearImage);
+    }
+
+    @Override
+    protected void addRuleInputView(int verb, int subject) {
+        if (mTextInputLayout != null) {
+            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) mInputView
+                    .getLayoutParams();
+            params.addRule(verb, subject);
+            mTextInputLayout.setLayoutParams(params);
+        }
     }
 
     public final TextInputLayout getTextInputLayout() {

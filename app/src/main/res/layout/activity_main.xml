@@ -1,98 +1,109 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.mylhyl.widget.sample.MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:gravity="center_horizontal"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
 
-    <com.mylhyl.widget.ClearEditText
-        android:id="@+id/auto_user"
+    <LinearLayout
+        android:id="@+id/input_layout"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:completionThreshold="1"
-        android:digits="0123456789qwertyuiopasdfghjklzxcvbnm"
-        android:hint="显示历史用户名"
-        android:src="@mipmap/ic_edit_clear"
-        android:textColor="#212121"
-        android:textSize="15sp"
-        app:input_marginLeft="20dp"
-        app:input_paddingRight="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_user"/>
-    </com.mylhyl.widget.ClearEditText>
-
-    <com.mylhyl.widget.ClearEditText
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="输入密码"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:src="@mipmap/ic_edit_clear"
-        android:textColor="#212121"
-        android:textSize="15sp"
-        app:input_marginLeft="20dp"
-        app:input_paddingRight="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_lock"/>
-    </com.mylhyl.widget.ClearEditText>
-
-    <com.mylhyl.widget.ClearEditText
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/bg_input"
-        android:digits="0123456789"
-        android:hint="输入手机号"
-        android:inputType="phone|number"
-        android:src="@mipmap/ic_edit_clear"
-        android:textColor="#212121"
-        android:textSize="15sp"
-        app:input_background="@android:color/transparent"
-        app:input_paddingLeft="60dp"
-        app:input_paddingRight="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="手机号："
-            android:textColor="#212121"
-            android:textSize="15sp"/>
-    </com.mylhyl.widget.ClearEditText>
-
-    <com.mylhyl.widget.ClearTextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:hint="输入密码"
-        android:inputType="textPassword"
-        android:maxLines="1"
-        android:src="@mipmap/ic_edit_clear"
-        android:textColor="#212121"
-        android:textSize="15sp"
-        app:input_marginLeft="20dp"
-        app:input_paddingRight="20dp"
-        app:passwordToggleEnabled="false"/>
-
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:maxLines="1"
-        android:text="登录"/>
+        android:layout_marginLeft="40px"
+        android:layout_marginTop="80px"
+        android:divider="@drawable/vertical_divider"
+        android:orientation="vertical"
+        android:showDividers="beginning|middle|end">
+
+        <com.mylhyl.widget.ClearEditText
+            android:id="@+id/user_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入账号"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:orientation="horizontal"
+            android:paddingBottom="24px"
+            android:paddingLeft="16px"
+            android:paddingRight="16px"
+            android:paddingTop="24px"
+            android:scaleType="centerInside"
+            android:singleLine="true"
+            android:src="@mipmap/ic_clear"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColorHint="#d3d3d3"
+            android:textSize="48px"
+            app:input_background="#ffffff"
+            app:input_clear_height="50px"
+            app:input_clear_width="50px"
+            app:input_layout_toRightOf="@+id/user_title"
+            app:input_paddingBottom="10px"
+            app:input_paddingTop="10px">
+
+            <TextView
+                android:id="@+id/user_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="10px"
+                android:paddingTop="10px"
+                android:text="账号："
+                android:textColor="#424242"
+                android:textSize="48px"/>
+
+
+        </com.mylhyl.widget.ClearEditText>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="60px"/>
+
+        <com.mylhyl.widget.ClearEditText
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="请输入密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:maxLength="20"
+            android:maxLines="1"
+            android:paddingBottom="24px"
+            android:paddingLeft="16px"
+            android:paddingRight="16px"
+            android:paddingTop="24px"
+            android:scaleType="centerInside"
+            android:singleLine="true"
+            android:src="@mipmap/ic_clear"
+            android:textColorHint="#d3d3d3"
+            android:textSize="48px"
+            app:input_background="#ffffff"
+            app:input_clear_height="50px"
+            app:input_clear_width="50px"
+            app:input_layout_toRightOf="@+id/password_title"
+            app:input_paddingBottom="10px"
+            app:input_paddingTop="10px">
+
+            <TextView
+                android:id="@+id/password_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="10px"
+                android:paddingTop="10px"
+                android:text="密码："
+                android:textColor="#424242"
+                android:textSize="48px"/>
+
+
+        </com.mylhyl.widget.ClearEditText>
+
+    </LinearLayout>
+
 </LinearLayout>
