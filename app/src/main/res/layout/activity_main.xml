@@ -75,6 +75,20 @@
             android:textSize="15sp"/>
     </com.mylhyl.widget.ClearEditText>
 
+    <com.mylhyl.widget.ClearTextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:hint="输入密码"
+        android:inputType="textPassword"
+        android:maxLines="1"
+        android:src="@mipmap/ic_edit_clear"
+        android:textColor="#212121"
+        android:textSize="15sp"
+        app:input_marginLeft="20dp"
+        app:input_paddingRight="20dp"
+        app:passwordToggleEnabled="false"/>
 
     <Button
         android:layout_width="wrap_content"
