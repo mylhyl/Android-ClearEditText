@@ -39,12 +39,14 @@ public final class ClearTextInputLayout extends AbsClear {
         RelativeLayout.LayoutParams textInputParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         textInputParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        //防止父控件的 margin 属性影响子控件
         textInputParams.setMargins(0, 0, 0, 0);
 
         mTextInputLayout.setLayoutParams(textInputParams);
 
         LinearLayout.LayoutParams inputParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //防止父控件的 margin 属性影响子控件
         inputParams.setMargins(0, 0, 0, 0);
         mInputView.setLayoutParams(inputParams);
     }

@@ -21,10 +21,9 @@
             android:id="@+id/user_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40px"
             android:hint="请输入账号"
             android:inputType="textPersonName"
-            android:maxLength="20"
-            android:maxLines="1"
             android:orientation="horizontal"
             android:paddingBottom="24px"
             android:paddingLeft="16px"
@@ -67,6 +66,7 @@
             android:id="@+id/password_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="40px"
             android:hint="请输入密码"
             android:imeOptions="actionDone"
             android:inputType="textPassword"
@@ -100,7 +100,6 @@
                 android:text="密码："
                 android:textColor="#424242"
                 android:textSize="48px"/>
-
 
         </com.mylhyl.widget.ClearEditText>
 

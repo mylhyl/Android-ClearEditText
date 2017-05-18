@@ -147,6 +147,7 @@ abstract class AbsClear extends RelativeLayout implements TextWatcher, View.OnCl
     void initView(AttributeSet attrs) {
         //输入框
         mInputView = new AutoCompleteTextView(mContext, attrs);
+        //防止父控件的 padding 属性影响子控件
         mInputView.setPadding(0, 0, 0, 0);
         mInputView.addTextChangedListener(this);
         mInputView.setOnFocusChangeListener(this);
@@ -154,6 +155,8 @@ abstract class AbsClear extends RelativeLayout implements TextWatcher, View.OnCl
 
         //清除图标
         mClearImage = new ImageView(mContext, attrs);
+        mClearImage.setId(android.R.id.icon);
+        //防止父控件的 padding 属性影响子控件
         mClearImage.setPadding(0, 0, 0, 0);
         mClearImage.setBackgroundColor(Color.TRANSPARENT);
         mClearImage.setVisibility(GONE);
@@ -165,10 +168,13 @@ abstract class AbsClear extends RelativeLayout implements TextWatcher, View.OnCl
     private void initClearParams() {
         LayoutParams clearParams = new LayoutParams(
                 LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        clearParams.setMargins(px2dp(10), 0, 0, 0);
         clearParams.addRule(RelativeLayout.CENTER_VERTICAL);
         clearParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 
         mClearImage.setLayoutParams(clearParams);
+
+        addRuleInputView(RelativeLayout.LEFT_OF, mClearImage.getId());
     }
 
     /**
@@ -374,4 +380,9 @@ abstract class AbsClear extends RelativeLayout implements TextWatcher, View.OnCl
         }
     }
 
+    private int px2dp(int px) {
+        float dp = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP, px, mContext.getResources().getDisplayMetrics());
+        return (int) dp;
+    }
 }

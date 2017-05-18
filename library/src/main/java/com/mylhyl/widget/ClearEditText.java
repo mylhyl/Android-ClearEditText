@@ -27,6 +27,7 @@ public final class ClearEditText extends AbsClear {
     protected void configInputParams() {
         RelativeLayout.LayoutParams inputParams = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //防止父控件的 margin 属性影响子控件
         inputParams.setMargins(0, 0, 0, 0);
         inputParams.addRule(RelativeLayout.CENTER_VERTICAL);
         mInputView.setLayoutParams(inputParams);
