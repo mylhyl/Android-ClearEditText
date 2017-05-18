@@ -16,6 +16,7 @@ import android.text.method.KeyListener;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -71,6 +72,18 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
             setInputPaddingRight(paddingRight);
         }
 
+        if (a.hasValue(R.styleable.ClearEditText_input_marginLeft)) {
+            int marginLeft = a.getDimensionPixelSize(
+                    R.styleable.ClearEditText_input_marginLeft, -1);
+            setInputMarginLeft(marginLeft);
+        }
+
+        if (a.hasValue(R.styleable.ClearEditText_input_marginRight)) {
+            int marginRight = a.getDimensionPixelSize(
+                    R.styleable.ClearEditText_input_marginRight, -1);
+            setInputMarginRight(marginRight);
+        }
+
         a.recycle();
     }
 
@@ -82,7 +95,6 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
                 .WRAP_CONTENT);
         inputParams.addRule(RelativeLayout.CENTER_VERTICAL);
 
-        mInputView.setBackgroundColor(Color.TRANSPARENT);
         mInputView.addTextChangedListener(this);
         mInputView.setOnFocusChangeListener(this);
 
@@ -141,6 +153,22 @@ public class ClearEditText extends RelativeLayout implements TextWatcher, View.O
                 right = paddingRight;
             }
             mInputView.setPadding(left, top, right, bottom);
+        }
+    }
+
+    public void setInputMarginLeft(int marginLeft) {
+        if (mInputView != null) {
+            LayoutParams layoutParams = (LayoutParams) mInputView.getLayoutParams();
+            layoutParams.leftMargin = marginLeft;
+            mInputView.setLayoutParams(layoutParams);
+        }
+    }
+
+    public void setInputMarginRight(int marginRight) {
+        if (mInputView != null) {
+            LayoutParams layoutParams = (LayoutParams) mInputView.getLayoutParams();
+            layoutParams.rightMargin = marginRight;
+            mInputView.setLayoutParams(layoutParams);
         }
     }
 

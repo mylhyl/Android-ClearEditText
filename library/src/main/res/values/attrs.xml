@@ -4,5 +4,7 @@
         <attr name="input_background" format="reference"/>
         <attr name="input_paddingLeft" format="dimension|reference"/>
         <attr name="input_paddingRight" format="dimension|reference"/>
+        <attr name="input_marginLeft" format="dimension|reference"/>
+        <attr name="input_marginRight" format="dimension|reference"/>
     </declare-styleable>
 </resources>
